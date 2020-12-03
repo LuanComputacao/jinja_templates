@@ -1,15 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Olá Mundo</title>
-</head>
-<body>
-    <h1>Olá Q3 com Jinja2</h1>
+{% extends "base.html" %}
 
-    {{resultado}}
+{% block title %} Hanking Codewars {% endblock title %}
+{% block content_title %} Hanking Codewars {% endblock content_title %}
 
-    <h2>Nome</h2>
-    <p>{{nome}}</p>
-</body>
-</html>
+{% block content %}
+
+    <div class="row">
+        <div class="col">
+            <h2>Acima de 40</h2>
+            <ul>
+                {% for codewar_item in codewars_ranking %}
+                    {% if codewar_item['points'] > 40 %}
+                        <li>
+                            <strong>{{ codewar_item['name'] }}</strong> => {{ codewar_item['points'] }} pts
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="col">
+            <h2>Com 40 pontos ou menos</h2>
+            <ul>
+                {% for codewar_item in codewars_ranking %}
+                    {% if codewar_item['points'] <= 40 %}
+                        <li>
+                            <strong>{{ codewar_item['name'] }}</strong> => {{ codewar_item['points'] }} pts
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+
+
+{% endblock content %}
