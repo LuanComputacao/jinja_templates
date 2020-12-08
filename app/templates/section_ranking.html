@@ -1,0 +1,27 @@
+{% macro user_data(name, points) %}
+    <li>
+        <strong>{{ name | title }}</strong> => {{ points }}pts
+    </li>
+{%- endmacro %}
+
+
+{% macro section_ranking(users, title, g_or_l_than, how_much) -%}
+    <div class="row">
+        <div class="col text-center">
+            <h2>{{ title }}</h2>
+        </div>
+        <ul>
+            {% for user in users %}
+                {% if g_or_l_than == 'g' %}
+                    {% if user['points'] > how_much %}
+                        {{ user_data(user['name'], user['points']) }}
+                    {% endif %}
+                {% elif g_or_l_than == 'l' %}
+                    {% if user['points'] <= how_much %}
+                        {{ user_data(user['name'], user['points']) }}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{%- endmacro %}

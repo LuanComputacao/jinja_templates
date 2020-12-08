@@ -1,35 +1,24 @@
+{% import 'section_ranking.html' as section_ranking %}
+
 {% extends "base.html" %}
+
 
 {% block title %} Hanking Codewars {% endblock title %}
 {% block content_title %} Hanking Codewars {% endblock content_title %}
 
 {% block content %}
-
     <div class="row">
         <div class="col">
-            <h2>Acima de 40</h2>
-            <ul>
-                {% for codewar_item in codewars_ranking %}
-                    {% if codewar_item['points'] > 40 %}
-                        <li>
-                            <strong>{{ codewar_item['name'] }}</strong> => {{ codewar_item['points'] }} pts
-                        </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
+            {% include 'menu.html' with context %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {{ section_ranking.section_ranking(codewars_ranking, 'Com mais de 40', 'g', 40 ) }}
         </div>
 
         <div class="col">
-            <h2>Com 40 pontos ou menos</h2>
-            <ul>
-                {% for codewar_item in codewars_ranking %}
-                    {% if codewar_item['points'] <= 40 %}
-                        <li>
-                            <strong>{{ codewar_item['name'] }}</strong> => {{ codewar_item['points'] }} pts
-                        </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
+            {{ section_ranking.section_ranking(codewars_ranking, 'Com 40 pontos ou menos', 'l', 40 ) }}
         </div>
     </div>
 
